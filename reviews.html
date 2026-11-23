@@ -205,7 +205,7 @@ document.getElementById("reviews").innerHTML = REVIEWS.map(r => `
     </details>
   </article>`).join("");
 // abre la review si se llega con #id
-if (location.hash) { const d = document.querySelector(location.hash + " details"); if (d) d.open = true; }
+if (location.hash) { const d = document.querySelector(location.hash + " details"); if (d) { d.open = true; setTimeout(() => d.closest(".rev").scrollIntoView({ behavior: "smooth", block: "start" }), 150); } }
 document.querySelectorAll(".jump a").forEach(a => a.addEventListener("click", () => { const d = document.querySelector(a.getAttribute("href") + " details"); if (d) d.open = true; }));
 </script>
 </body>
