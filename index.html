@@ -64,6 +64,7 @@
   .price s{font-family:Poppins;font-weight:600;font-size:13px;color:var(--muted);margin-left:6px}
   .btn{flex:none;padding:9px 14px;border-radius:12px;background:var(--yellow);color:#000;font-weight:800;font-size:13px;box-shadow:0 0 0 0 rgba(255,214,10,.6);animation:pulse 2.2s infinite}
   @keyframes pulse{70%{box-shadow:0 0 0 12px rgba(255,214,10,0)}100%{box-shadow:0 0 0 0 rgba(255,214,10,0)}}
+  .rv{display:inline-block;margin:8px 14px 0 0;font-weight:800;font-size:13px;color:var(--yellow);cursor:pointer}
   .vid{display:inline-block;margin-top:8px;font-weight:800;font-size:13px;color:var(--cyan);cursor:pointer}
   .soon{justify-content:center;text-align:center;border-style:dashed;color:var(--muted);font-weight:600}
   .empty{text-align:center;color:var(--muted);padding:30px 0;display:none}
@@ -119,12 +120,14 @@
    y pon tu enlace de afiliado (el de SiteStripe: amzn.to/... o con tag=...).
    - num: orden (el número más alto sale el primero)
    - video: enlace a tu vídeo de TikTok (opcional, deja "" si aún no)
+   - review: el id de su review en reviews.html (opcional)
    - img: ruta a una foto (p. ej. "img/auriculares.webp") o deja "" y usa emoji
    - antes: precio anterior tachado (opcional, pon "" si no hay)
    ===================================================================== */
 const PRODUCTOS = [
   {
     num: 1,
+    review: "pixel-11-pro-xl",
     nombre: "Google Pixel 11 Pro XL",
     categoria: "Móviles",
     nota: "Obsidiana · 256 GB. Gemini, Magic Capture y la mejor cámara de Google.",
@@ -137,6 +140,7 @@ const PRODUCTOS = [
   },
   {
     num: 2,
+    review: "logitech-lift",
     nombre: "Logitech Lift · Ratón vertical ergonómico",
     categoria: "Accesorios",
     nota: "Clics silenciosos y adiós al dolor de muñeca. Ideal para trabajar horas.",
@@ -149,6 +153,7 @@ const PRODUCTOS = [
   },
   {
     num: 3,
+    review: "aula-f75",
     nombre: "EPOMAKER x AULA F75 · Teclado mecánico inalámbrico RGB",
     categoria: "Teclados",
     nota: "El teclado que suena a gloria: tecleo suave y silencioso, luces RGB que lo petan y sin cables (Bluetooth, 2.4G o USB-C). Batería de 4000 mAh, ruedita multimedia y switches que cambias sin soldar.",
@@ -161,6 +166,7 @@ const PRODUCTOS = [
   },
   {
     num: 4,
+    review: "iphone-18-pro",
     nombre: "iPhone 18 Pro · 256 GB · Burdeos",
     categoria: "Móviles",
     nota: "El iPhone más potente: chip A20 Pro, pantalla de 6,3\" a 120 Hz y la mejor batería de un iPhone. Triple cámara de 48 MP con apertura variable y zoom 8x. También en negro, plata y azul glaciar.",
@@ -197,6 +203,7 @@ function render() {
         <div class="name">${p.nombre}</div>
         <div class="note">${p.nota}</div>
         <div class="buy"><span class="price">${p.precio}${p.antes ? `<s>${p.antes}</s>` : ""}</span><span class="btn">Ver en Amazon →</span></div>
+        ${p.review ? `<span class="rv" onclick="event.preventDefault();event.stopPropagation();location.href='reviews.html#${p.review}'">📖 Leer la review</span>` : ""}
         ${p.video ? `<span class="vid" onclick="event.preventDefault();event.stopPropagation();window.open('${p.video}','_blank')">▶ Ver mi vídeo</span>` : ""}
       </div>
     </a>`).join("") + (t || cat !== "Todo" ? "" : `<div class="card soon">🔥 Más productos muy pronto · ¡activa las notificaciones en TikTok!</div>`);
